@@ -1,6 +1,7 @@
 use petgraph::dot::Dot;
 use petgraph::graph::UnGraph;
 
+
 fn main() {
     let mut g = UnGraph::<String, u32>::new_undirected();
 
