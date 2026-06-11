@@ -20,5 +20,31 @@ fn main() {
     añadir_conexion(&mut mapa_ciudades, "Santa Ana".to_string(), "Sonsonate".to_string(), 40);
     añadir_conexion(&mut mapa_ciudades, "Sonsonate".to_string(), "San Salvador".to_string(), 64);
 
-   
+    //Menu
+    println!("\n--- Buscando Ruta Más Corta (BFS) ---");
+    let origen = "Santa Ana".to_string(); // o "Sevilla"
+    let destino = "San Miguel".to_string(); // o "Zaragoza"
+
+    match ruta_mas_corta(&mapa_ciudades, origen.clone(), destino.clone()) {
+        Some((_distancia_total, ruta)) => {
+            // Unimos los nombres del vector con la flecha
+            let ruta_formateada = ruta.join(" -> ");
+
+            // Los saltos son la cantidad de ciudades en la ruta menos 1
+            let saltos = ruta.len() - 1;
+
+            // Imprimimos exactamente como lo pide el profesor
+            println!("{} ({} saltos).", ruta_formateada, saltos);
+
+            // Si el profesor también quiere ver la distancia en kilómetros,
+            // puedes descomentar esta línea:
+            // println!("Distancia total: {} km", _distancia_total);
+        }
+        None => {
+            println!("No se pudo encontrar una ruta entre {} y {}.", origen, destino);
+        }
+    }
+
+
+
 }
