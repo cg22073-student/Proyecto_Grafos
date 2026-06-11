@@ -2,7 +2,7 @@ use petgraph::graph::UnGraph;
 mod funciones;
 mod menu;
 use crate::funciones::*;
-
+use crate::menu::iniciar_menu;
 fn main() {
     // 1. Inicializamos el grafo
     let mut mapa_ciudades = UnGraph::<String, u32>::new_undirected();
@@ -21,6 +21,6 @@ fn main() {
     añadir_conexion(&mut mapa_ciudades, "Santa Ana".to_string(), "Sonsonate".to_string(), 40);
     añadir_conexion(&mut mapa_ciudades, "Sonsonate".to_string(), "San Salvador".to_string(), 64);
 
-    menu::iniciar_menu(&mut mapa_ciudades);
+    iniciar_menu(&mut mapa_ciudades)
    
 }
