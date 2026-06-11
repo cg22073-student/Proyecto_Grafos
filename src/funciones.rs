@@ -138,3 +138,33 @@ pub fn ruta_mas_corta(
         None
     }
 }
+
+pub fn exportar_dot(grafo: &UnGraph<String, u32>, nombre_archivo: &str) -> Result<String> {
+    let dot = format!("{:?}", Dot::new(grafo));
+    std::fs::write(nombre_archivo, &dot)?;
+    println!("Archivo DOT generado exitosamente en: {}", nombre_archivo);
+
+    let nombre_imagen = nombre_archivo.replace(".dot", ".png");
+
+    let output = Command::new("dot")
+        .arg("-Tpng")
+        .arg(nombre_archivo)
+        .arg("-o")
+        .arg(&nombre_imagen)
+        .output();
+
+    match output {
+        Ok(out) if out.status.success() => {
+            println!("Imagen generada exitosamente en: {}", nombre_imagen);
+        }
+        Ok(out) => {
+            let error = String::from_utf8_lossy(&out.stderr);
+            eprintln!("Se intentó generar la imagen, pero Graphviz reportó un error:\n{}", error);
+        }
+        Err(e) => {
+            println!("Nota: No se pudo generar la imagen PNG porque Graphviz ('dot') no está instalado o no se encuentra en el PATH.\nDetalle: {}", e);
+        }
+    }
+
+    Ok(dot)
+}

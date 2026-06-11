@@ -1,5 +1,6 @@
 use petgraph::graph::UnGraph;
 mod funciones;
+mod menu;
 use crate::funciones::*;
 
 fn main() {
@@ -20,5 +21,6 @@ fn main() {
     añadir_conexion(&mut mapa_ciudades, "Santa Ana".to_string(), "Sonsonate".to_string(), 40);
     añadir_conexion(&mut mapa_ciudades, "Sonsonate".to_string(), "San Salvador".to_string(), 64);
 
+    menu::iniciar_menu(&mut mapa_ciudades);
    
 }
