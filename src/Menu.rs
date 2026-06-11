@@ -48,7 +48,7 @@ pub fn iniciar_menu(mapa_ciudades: &mut UnGraph<String, u32>) {
                         println!("  2. mapa_vías.png (¡Tu imagen lista para ver!)");
                     }
                     Err(e) => {
-                        println!("❌ Error al generar la imagen: {}", e);
+                        println!(" Error al generar la imagen: {}", e);
                     }
                 }
             }
