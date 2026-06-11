@@ -1,27 +1,24 @@
-use petgraph::dot::Dot;
 use petgraph::graph::UnGraph;
-
+mod funciones;
+use crate::funciones::*;
 
 fn main() {
-    let mut g = UnGraph::<String, u32>::new_undirected();
+    // 1. Inicializamos el grafo
+    let mut mapa_ciudades = UnGraph::<String, u32>::new_undirected();
 
-    let ber = g.add_node("Berlin".to_owned());
-    let del = g.add_node("New Delhi".to_owned());
-    let mex = g.add_node("Mexico City".to_owned());
-    let syd = g.add_node("Sydney".to_owned());
+    println!("--- Creando Ciudades ---");
+    // 2. Añadimos algunas ciudades
+    añadir_ciudad(&mut mapa_ciudades, "San Salvador");
+    añadir_ciudad(&mut mapa_ciudades, "Santa Ana");
+    añadir_ciudad(&mut mapa_ciudades, "San Miguel");
+    añadir_ciudad(&mut mapa_ciudades, "Sonsonate");
 
-    g.extend_with_edges(&[
-        (ber, del, 6_000),
-        (ber, mex, 10_000),
-        (ber, syd, 16_000),
-        (del, mex, 14_000),
-        (del, syd, 12_000),
-        (mex, syd, 15_000),
-    ]);
+    println!("\n--- Creando Conexiones ---");
+    // 3. Conectamos las ciudades con sus respectivas distancias (ejemplo)
+    añadir_conexion(&mut mapa_ciudades, "San Salvador".to_string(), "Santa Ana".to_string(), 65);
+    añadir_conexion(&mut mapa_ciudades, "San Salvador".to_string(), "San Miguel".to_string(), 138);
+    añadir_conexion(&mut mapa_ciudades, "Santa Ana".to_string(), "Sonsonate".to_string(), 40);
+    añadir_conexion(&mut mapa_ciudades, "Sonsonate".to_string(), "San Salvador".to_string(), 64);
 
-    let dot = format!("{:?}", Dot::new(&g));
-
-    println!("{}", dot);
-
-    std::fs::write("flight_network.dot", dot).unwrap();
+   
 }

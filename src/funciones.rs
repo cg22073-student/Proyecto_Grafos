@@ -1,4 +1,8 @@
 use petgraph::algo::astar;
+use petgraph::dot::Dot;
+use std::io::Result;
+use std::process::Command;
+use std::collections::{VecDeque,HashMap};
 use petgraph::{graph::{UnGraph,NodeIndex,EdgeIndex}};
 
 pub fn añadir_ciudad(grafo: &mut UnGraph<String, u32>, nombre: &str) -> NodeIndex {
